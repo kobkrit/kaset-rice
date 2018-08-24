@@ -2,6 +2,18 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import requests
+r = requests.get('http://kaset-prediction.iapp.co.th/api/breed')
+print(r.text)
+
+exit()
+
+#RNN Layers
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import LSTM
+regressor = Sequential()
+
 
 # Reading CSV file from train set
 training_set = pd.read_csv('train-rice.csv')
@@ -34,13 +46,6 @@ X_train = np.reshape(X_train,(416, 1, 1))
 print(X_train)
 
 #-------------------------Need to be have Keras and TensorFlow backend--------------------------- 
-
-
-#RNN Layers
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import LSTM
-regressor = Sequential()
 
 # Adding the input layer and the LSTM layer
 regressor.add(LSTM(units = 8, activation = 'sigmoid', input_shape = (None, 1)))
